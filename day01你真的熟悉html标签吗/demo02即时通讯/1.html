@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  title 标签与 Hack 手段：消息提醒
+  作为前端工程师的你对 B/S 架构肯定不陌生，它有很多的优点，比如版本更新方便、跨平台、跨终端，但在处理某些场景，比如即时通信场景时，就会变得比较麻烦。
+
+  因为前后端通信深度依赖 HTTP 协议，而 HTTP 协议采用“请求-响应”模式，这就决定了服务端也只能被动地发送数据。一种低效的解决方案是客户端通过轮询机制获取最新消息（HTML5 下可使用 WebSocket 协议）。
+
+  消息提醒功能实现则比较困难，HTML5 标准发布之前，浏览器没有开放图标闪烁、弹出系统消息之类的接口，只能借助一些 Hack 的手段，比如修改 title 标签来达到类似的效果（HTML5 下可使用 Web Notifications
+  API 弹出系统消息）。
+
+  下面这段代码中，通过定时修改 title 标签内容，模拟了类似消息提醒的闪烁效果：
+  <code>
+    <pre>
+        let msgNum = 1 // 消息条数
+        let cnt = 0 // 计数器
+        const inerval = setInterval(() => {
+          cnt = (cnt + 1) % 2
+          if(msgNum===0) {
+            // 通过DOM修改title
+            document.title += `聊天页面`
+            clearInterval(interval)
+            return
+          }
+          const prefix = cnt % 2 ? `新消息(${msgNum})` : ''
+          document.title = `${prefix}聊天页面`
+        }, 1000)
+    </pre>
+   
+  </code>
+
+  通过模拟消息闪烁，可以让用户在浏览其他页面的时候，及时得知服务端返回的消息。
+
+  定时修改 title 标签内容，除了用来实现闪烁效果之外，还可以制作其他动画效果，比如文字滚动，但需要注意浏览器会对 title 标签文本进行去空格操作。
+
+  动态修改 title 标签的用途不仅在于消息提醒，你还可以将一些关键信息显示到标签上（比如下载时的进度、当前操作步骤），从而提升用户体验。
+</body>
+<script>
+  let msgNum = 1 // 消息条数
+  let cnt = 0 // 计数器
+  const inerval = setInterval(() => {
+    cnt = (cnt + 1) % 2
+    if (msgNum === 0) {
+      // 通过DOM修改title
+      document.title += `聊天页面`
+      clearInterval(interval)
+      return
+    }
+    const prefix = cnt % 2 ? `新消息(${msgNum})` : ''
+    document.title = `${prefix}聊天页面`
+  }, 1000)
+</script>
+
+</html>

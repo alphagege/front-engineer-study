@@ -1,0 +1,40 @@
+<!--
+ * @Descriptions: 
+ * @Version: 
+ * @Author: 
+ * @Date: 2020-08-31 18:06:07
+ * @LastEditors: dongwenjie
+ * @LastEditTime: 2020-08-31 18:10:05
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  在我们对大型单页应用进行性能优化时，也许会用到按需懒加载的方式，来加载对应的模块，但如果能合理利用 link 标签的 rel 属性值来进行预加载，就能进一步提升渲染速度。
+
+  dns-prefetch。当 link 标签的 rel 属性值为“dns-prefetch”时，浏览器会对某个域名预先进行 DNS 解析并缓存。这样，当浏览器在请求同域名资源的时候，能省去从域名查询 IP
+  的过程，从而减少时间损耗。下图是淘宝网设置的 DNS 预解析。
+
+
+
+  preconnect。让浏览器在一个 HTTP 请求正式发给服务器前预先执行一些操作，这包括 DNS 解析、TLS 协商、TCP 握手，通过消除往返延迟来为用户节省时间。
+
+  prefetch/preload。两个值都是让浏览器预先下载并缓存某个资源，但不同的是，prefetch 可能会在浏览器忙时被忽略，而 preload 则是一定会被预先下载。
+
+  prerender。浏览器不仅会加载资源，还会解析执行页面，进行预渲染。
+
+  这几个属性值恰好反映了浏览器获取资源文件的过程，在这里我绘制了一个流程简图，方便你记忆。
+
+
+
+  浏览器获取资源文件的流程
+</body>
+
+</html>
